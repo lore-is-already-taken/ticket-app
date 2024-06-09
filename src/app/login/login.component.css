@@ -1,15 +1,8 @@
-.container_name {
-  max-width: 500px;
-  margin-top: 5em;
-}
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 /* Bordered form */
 form {
   border: 3px solid #f1f1f1;
+  max-width: 30em;
+  margin: auto;
 }
 
 /* Full-width inputs */
