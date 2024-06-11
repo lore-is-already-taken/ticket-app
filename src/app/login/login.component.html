@@ -1,26 +1,24 @@
 <div>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
     <div class="imgcontainer">
       <img src="https://github.com/Klithik.png" alt="Avatar" class="avatar" />
     </div>
 
     <div class="container">
-      <label for="uname"><b>Username</b></label>
+      <label for="uemail"><b>Email</b></label>
       <input
-        formControlName="email"
+        id="uemail"
         type="text"
-        placeholder="Enter Username"
-        name="uname"
-        required
+        placeholder="Enter email"
+        formControlName="email"
       />
 
       <label for="psw"><b>Password</b></label>
       <input
-        formControlName="password"
+        id="psw"
         type="password"
         placeholder="Enter Password"
-        name="psw"
-        required
+        formControlName="password"
       />
 
       <button type="submit">Login</button>
