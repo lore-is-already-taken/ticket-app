@@ -1,0 +1,9 @@
+services:
+  ticket-front:
+    build: .
+    container_name: api_lore
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/home/app
+  
