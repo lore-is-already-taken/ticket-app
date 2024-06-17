@@ -57,7 +57,9 @@ export class UserSettingsComponent {
 		);
 	}
 	deleteUser() {
-		console.log("borrando usuario");
+		this.userSettings.deleteUser().subscribe({
+			next: () => alert("your account has been deleted"),
+		});
 	}
 	changePassword() {
 		if (

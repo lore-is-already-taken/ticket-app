@@ -10,8 +10,9 @@ import { API_URL } from "./common";
 })
 export class ChangeSettingsService {
 	CHANGE_URL = API_URL + "update_name";
-	UPDATE_PASS_URL = API_URL + "update_pass";
 	GET_USER_URL = API_URL + "get_user";
+	UPDATE_PASS_URL = API_URL + "update_pass";
+	DROP_USER_URL = API_URL + "drop_user";
 	constructor(
 		private httpClient: HttpClient,
 		private auth: AuthService,
@@ -33,6 +34,16 @@ export class ChangeSettingsService {
 			newPass: newpass,
 		};
 		return this.httpClient.post<any>(this.UPDATE_PASS_URL, request);
+	}
+
+	deleteUser(): Observable<any> {
+		const request = {
+			access_token: this.auth.getToken(),
+		};
+		const response = this.httpClient.post(this.DROP_USER_URL, request);
+		alert("tu cuenta fue eliminada exitosamente");
+		this.auth.logout();
+		return response;
 	}
 
 	getUser(): Observable<EmailUsername> {
