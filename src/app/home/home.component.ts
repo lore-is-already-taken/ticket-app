@@ -4,6 +4,8 @@ import { TicketComponent } from "../ticket/ticket.component";
 import { TicketServicesService } from "../core/services/ticket-services.service";
 import { CommonModule } from "@angular/common";
 import { TicketInterface } from "../interfaces/ticket.interface";
+import { UserInterface } from "../interfaces/user.interface";
+import { ChangeSettingsService } from "../core/services/change-settings.service";
 
 @Component({
 	selector: "app-home",
@@ -14,8 +16,12 @@ import { TicketInterface } from "../interfaces/ticket.interface";
 })
 export class HomeComponent implements OnInit {
 	tickets: TicketInterface[] = [];
+	user: UserInterface = { email: "", access_token: "", username: "", rol: "" };
 
-	constructor(private ticketServices: TicketServicesService) {}
+	constructor(
+		private ticketServices: TicketServicesService,
+		private userSettings: ChangeSettingsService,
+	) {}
 
 	ngOnInit(): void {
 		this.ticketServices.getAllTickets().subscribe({
@@ -24,6 +30,12 @@ export class HomeComponent implements OnInit {
 				console.log(this.tickets);
 			},
 			error: (err) => console.error("Error fetching tickets", err),
+		});
+		this.userSettings.getUser().subscribe({
+			next: (x) => {
+				this.user = x;
+				console.log(this.user);
+			},
 		});
 	}
 }

@@ -1,7 +1,8 @@
 export interface UserInterface {
 	email: string;
-	token: string;
+	access_token: string;
 	username: string;
+	rol: string;
 }
 export interface RegistrationInterface {
 	name: string;

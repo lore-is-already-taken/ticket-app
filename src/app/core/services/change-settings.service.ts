@@ -45,7 +45,7 @@ export class ChangeSettingsService {
 		return response;
 	}
 
-	getUser(): Observable<EmailUsername> {
+	getUser(): Observable<any> {
 		const solicitud = this.httpClient.post<any>(this.GET_USER_URL, {
 			access_token: this.auth.getToken(),
 		});
