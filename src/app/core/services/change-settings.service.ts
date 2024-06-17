@@ -41,9 +41,7 @@ export class ChangeSettingsService {
 			access_token: this.auth.getToken(),
 		};
 		const response = this.httpClient.post(this.DROP_USER_URL, request);
-		console.log(response);
-		//alert("tu cuenta fue eliminada exitosamente");
-		//this.auth.logout();
+		this.auth.logout;
 		return response;
 	}
 
