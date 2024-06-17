@@ -10,6 +10,7 @@ import { API_URL } from "./common";
 })
 export class ChangeSettingsService {
 	CHANGE_URL = API_URL + "update_name";
+	UPDATE_PASS_URL = API_URL + "update_pass";
 	GET_USER_URL = API_URL + "get_user";
 	constructor(
 		private httpClient: HttpClient,
@@ -24,6 +25,16 @@ export class ChangeSettingsService {
 		this.getUser();
 		return this.httpClient.post<any>(this.CHANGE_URL, request);
 	}
+
+	changePassword(oldpass: string, newpass: string): Observable<any> {
+		const request = {
+			access_token: this.auth.getToken(),
+			oldPass: oldpass,
+			newPass: newpass,
+		};
+		return this.httpClient.post<any>(this.UPDATE_PASS_URL, request);
+	}
+
 	getUser(): Observable<EmailUsername> {
 		const solicitud = this.httpClient.post<any>(this.GET_USER_URL, {
 			access_token: this.auth.getToken(),

@@ -17,6 +17,7 @@ export class UserSettingsComponent {
 	changePasswordForm = this.formBuilder.group({
 		newPass: ["", Validators.required],
 		confirmNewPass: ["", Validators.required],
+		oldPassword: ["", Validators.required],
 	});
 
 	user = { name: "", email: "" };
@@ -59,7 +60,19 @@ export class UserSettingsComponent {
 		console.log("borrando usuario");
 	}
 	changePassword() {
-		console.log("cambiando paswords");
+		if (
+			this.changePasswordForm.value.newPass! ===
+			this.changePasswordForm.value.confirmNewPass!
+		) {
+			this.userSettings
+				.changePassword(
+					this.changePasswordForm.value.oldPassword!,
+					this.changePasswordForm.value.newPass!,
+				)
+				.subscribe({ next: () => alert("password changed") });
+		} else {
+			alert("passwords paswords do not match");
+		}
 	}
 
 	constructor(
