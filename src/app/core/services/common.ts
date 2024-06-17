@@ -1,1 +1,1 @@
-export const API_URL = "https://ticket-fastapi.azurewebsites.net/";
+export const API_URL = "http://localhost:8000/";

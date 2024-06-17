@@ -22,6 +22,7 @@ export class TicketServicesService {
 
 	createTicket(ticket: any): Observable<any> {
 		const request = { ...ticket, access_token: this.aithService.getToken() };
-		return this.httpClient.post(`${this.CREATE_TICKET_URL}`, request);
+		console.log(request);
+		return this.httpClient.post(this.CREATE_TICKET_URL, request);
 	}
 }
