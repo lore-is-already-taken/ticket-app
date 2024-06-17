@@ -8,11 +8,12 @@ import {
 import { AuthService } from "../core/services/auth.service";
 import { Router, RouterLink } from "@angular/router";
 import { CommonModule } from "@angular/common";
+import { NavbarComponent } from "../navbar/navbar.component";
 
 @Component({
 	selector: "app-login",
 	standalone: true,
-	imports: [RouterLink, ReactiveFormsModule, FormsModule, CommonModule],
+	imports: [NavbarComponent,RouterLink, ReactiveFormsModule, FormsModule, CommonModule],
 	templateUrl: "./login.component.html",
 	styleUrl: "./login.component.css",
 })

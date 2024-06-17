@@ -1,4 +1,6 @@
-li {
+div {
+  max-width: 70%;
   margin: auto;
-  margin-bottom: 2em;
+  margin-top: 2rem;
+  max-height: 500px;
 }
