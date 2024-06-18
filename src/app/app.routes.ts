@@ -6,36 +6,42 @@ import { authGuard } from "./core/guard/auth.guard";
 import { authenticatedGuard } from "./core/guard/authenticated.guard";
 import { UserSettingsComponent } from "./user-settings/user-settings.component";
 import { CreateTicketComponent } from "./create-ticket/create-ticket.component";
+import { MyTicketsComponent } from "./my-tickets/my-tickets.component";
 
 export const routes: Routes = [
-  {
-    path: "",
-    component: HomeComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: "login",
-    component: LoginComponent,
-    canActivate: [authenticatedGuard],
-  },
-  {
-    path: "signin",
-    component: SigninComponent,
-    canActivate: [authenticatedGuard],
-  },
-  {
-    path: "home",
-    component: HomeComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: "userSettings",
-    component: UserSettingsComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: "create-ticket",
-    component: CreateTicketComponent,
-    canActivate: [authGuard],
-  }
+	{
+		path: "",
+		component: HomeComponent,
+		canActivate: [authGuard],
+	},
+	{
+		path: "login",
+		component: LoginComponent,
+		canActivate: [authenticatedGuard],
+	},
+	{
+		path: "signin",
+		component: SigninComponent,
+		canActivate: [authenticatedGuard],
+	},
+	{
+		path: "home",
+		component: HomeComponent,
+		canActivate: [authGuard],
+	},
+	{
+		path: "userSettings",
+		component: UserSettingsComponent,
+		canActivate: [authGuard],
+	},
+	{
+		path: "create-ticket",
+		component: CreateTicketComponent,
+		canActivate: [authGuard],
+	},
+	{
+		path: "myTickets",
+		component: MyTicketsComponent,
+		canActivate: [authGuard],
+	},
 ];

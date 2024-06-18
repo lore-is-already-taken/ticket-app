@@ -24,6 +24,15 @@ export class HomeComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
+		this.getTickets();
+		this.userSettings.getUser().subscribe({
+			next: (x) => {
+				this.user = x;
+				console.log(this.user);
+			},
+		});
+	}
+	getTickets() {
 		this.ticketServices.getAllTickets().subscribe({
 			next: (data) => {
 				this.tickets = data;
@@ -31,10 +40,17 @@ export class HomeComponent implements OnInit {
 			},
 			error: (err) => console.error("Error fetching tickets", err),
 		});
-		this.userSettings.getUser().subscribe({
-			next: (x) => {
-				this.user = x;
-				console.log(this.user);
+	}
+
+	takeTicket(ticketId: number) {
+		this.ticketServices.assignTicket(ticketId).subscribe({
+			next: () => {
+				this.getTickets();
+				alert("Ticket asignado Correctamente");
+			},
+			error: (err) => {
+				console.log("no se pudo asignar ticket", err);
+				alert("no se pudoa ssignar ticket");
 			},
 		});
 	}

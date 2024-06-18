@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { AuthService } from "./auth.service";
 import { API_URL } from "./common";
+import { TicketInterface } from "../../interfaces/ticket.interface";
 
 @Injectable({
 	providedIn: "root",
@@ -10,10 +11,13 @@ import { API_URL } from "./common";
 export class TicketServicesService {
 	GET_ALL_TICKETS_URL = API_URL + "get_tickets";
 	CREATE_TICKET_URL = API_URL + "add_ticket";
+	ASSIGN_TICKER_URL = API_URL + "assign_ticket";
 
+	GET_TICKETS_BY_AUTOR_URL = API_URL + "get_tickets_by_autor";
+	GET_TICKETS_BY_USER_URL = API_URL + "get_tickets_by_responsable";
 	constructor(
 		private httpClient: HttpClient,
-		private aithService: AuthService,
+		private authService: AuthService,
 	) {}
 
 	getAllTickets(): Observable<any[]> {
@@ -21,8 +25,31 @@ export class TicketServicesService {
 	}
 
 	createTicket(ticket: any): Observable<any> {
-		const request = { ...ticket, access_token: this.aithService.getToken() };
+		const request = { ...ticket, access_token: this.authService.getToken() };
 		console.log(request);
 		return this.httpClient.post(this.CREATE_TICKET_URL, request);
+	}
+
+	getTicketsByAuthor(): Observable<any> {
+		const request = {
+			access_token: this.authService.getToken(),
+		};
+		return this.httpClient.post<any>(this.GET_TICKETS_BY_AUTOR_URL, request);
+	}
+
+	getTicketsByResponsable(): Observable<any> {
+		const request = {
+			access_token: this.authService.getToken(),
+		};
+		return this.httpClient.post<any>(this.GET_TICKETS_BY_USER_URL, request);
+	}
+
+	assignTicket(ticketID: number): Observable<any> {
+		const request = {
+			access_token: this.authService.getToken(),
+			ticket_id: ticketID,
+		};
+		console.log(request);
+		return this.httpClient.post<any>(this.ASSIGN_TICKER_URL, request);
 	}
 }
