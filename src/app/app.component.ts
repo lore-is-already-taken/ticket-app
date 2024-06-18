@@ -3,10 +3,12 @@ import { NavbarComponent } from "./navbar/navbar.component";
 import { Component } from "@angular/core";
 import { initFlowbite } from "flowbite";
 import { LoginComponent } from "./login/login.component";
+import { NotificationBellComponent } from "./notification/notification-bell.component";
+
 @Component({
 	selector: "app-root",
 	standalone: true,
-	imports: [RouterOutlet, RouterLink, NavbarComponent, LoginComponent],
+	imports: [RouterOutlet, RouterLink, NavbarComponent, NotificationBellComponent],
 	templateUrl: "./app.component.html",
 	styleUrl: "./app.component.css",
 })
