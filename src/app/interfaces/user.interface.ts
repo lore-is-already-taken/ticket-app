@@ -4,6 +4,9 @@ export interface UserInterface {
 	username: string;
 	rol: string;
 }
+export interface UserInterfaceWithId extends UserInterface {
+	id: number;
+}
 export interface RegistrationInterface {
 	name: string;
 	email: string;
@@ -17,4 +20,9 @@ export interface changeName {
 export interface EmailUsername {
 	name: string;
 	email: string;
+}
+export interface AutorByRol {
+	name: string;
+	email: string;
+	rol: number;
 }

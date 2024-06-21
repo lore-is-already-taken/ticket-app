@@ -1,6 +1,17 @@
-div {
-  max-width: 70%;
-  margin: auto;
-  margin-top: 2rem;
+.table-lore {
+  border: solid;
   max-height: 500px;
+  max-width: 90%;
+  margin: auto;
+  margin-bottom: 5rem;
+}
+
+.filtro {
+  max-height: 500px;
+  max-width: 90%;
+  margin: auto;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }

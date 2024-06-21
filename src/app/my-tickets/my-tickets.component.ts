@@ -12,22 +12,21 @@ import { TicketInterface } from "../interfaces/ticket.interface";
 export class MyTicketsComponent {
 	constructor(private ticketServices: TicketServicesService) {}
 
-	tickets: TicketInterface[] = [];
+	tickets_owned: TicketInterface[] = [];
+	tickets_pending: TicketInterface[] = [];
 	ticketLength = 0;
 
 	ngOnInit(): void {
-		this.get_tickets();
-	}
-
-	get_tickets() {
 		this.ticketServices.getTicketsByAuthor().subscribe({
 			next: (data) => {
-				this.tickets = data;
+				console.log("owned: ", data);
+				this.tickets_owned = data;
 			},
 		});
 		this.ticketServices.getTicketsByResponsable().subscribe({
 			next: (data) => {
-				this.tickets = [...data];
+				console.log("pending: ", data);
+				this.tickets_pending = data;
 			},
 		});
 	}
