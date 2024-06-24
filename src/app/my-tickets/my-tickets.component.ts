@@ -30,4 +30,7 @@ export class MyTicketsComponent {
 			},
 		});
 	}
+	closeTicket() {
+		console.log("cerrando ticket");
+	}
 }
