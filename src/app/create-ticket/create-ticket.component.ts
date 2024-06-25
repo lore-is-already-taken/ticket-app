@@ -20,7 +20,7 @@ export class CreateTicketComponent implements OnInit {
 	) {
 		this.ticketForm = this.fb.group({
 			contenido: ["", Validators.required],
-			categoria: ["", Validators.required],
+			categoria: ["Soporte", Validators.required],
 			prioridad: [1, Validators.required],
 		});
 	}

@@ -20,7 +20,7 @@ export class UserSettingsComponent {
 		oldPassword: ["", Validators.required],
 	});
 
-	user = { name: "", email: "" };
+	user = { nombre: "", email: "" };
 
 	ngOnInit(): void {
 		this.getUser();
@@ -37,25 +37,25 @@ export class UserSettingsComponent {
 				});
 			this.userSettings.getUser().subscribe({
 				next: (x) => {
-					console.log("este es el k edite", x);
-					this.user.name = x.name;
+					this.user.nombre = x.name;
 					this.user.email = x.email;
 				},
 			});
+			this.getUser();
 		} else {
 			alert("No puede un nombre vacio");
 		}
 	}
+
 	getUser() {
-		console.log(
-			this.userSettings.getUser().subscribe({
-				next: (user_info) => {
-					this.user.name = user_info.name;
-					this.user.email = user_info.email;
-				},
-			}),
-		);
+		this.userSettings.getUser().subscribe({
+			next: (user_info) => {
+				this.user.nombre = user_info.nombre;
+				this.user.email = user_info.email;
+			},
+		});
 	}
+
 	deleteUser() {
 		this.userSettings.deleteUser().subscribe({
 			next: () => alert("your account has been deleted"),
@@ -71,7 +71,12 @@ export class UserSettingsComponent {
 					this.changePasswordForm.value.oldPassword!,
 					this.changePasswordForm.value.newPass!,
 				)
-				.subscribe({ next: () => alert("password changed") });
+				.subscribe({
+					next: () => alert("password changed"),
+					error: () => {
+						alert("no se pudo cambiar contraseña, revisa tus datos");
+					},
+				});
 		} else {
 			alert("passwords paswords do not match");
 		}

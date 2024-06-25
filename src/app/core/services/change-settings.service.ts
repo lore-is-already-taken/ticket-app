@@ -1,6 +1,10 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { EmailUsername, changeName } from "../../interfaces/user.interface";
+import {
+	AutorByRol,
+	EmailUsername,
+	changeName,
+} from "../../interfaces/user.interface";
 import { Observable } from "rxjs";
 import { AuthService } from "./auth.service";
 import { API_URL } from "./common";
@@ -13,6 +17,7 @@ export class ChangeSettingsService {
 	GET_USER_URL = API_URL + "get_user";
 	UPDATE_PASS_URL = API_URL + "update_pass";
 	DROP_USER_URL = API_URL + "drop_user";
+	GET_USER_BY_ID_URL = API_URL + "get_user_by_rol";
 	constructor(
 		private httpClient: HttpClient,
 		private auth: AuthService,
@@ -36,6 +41,13 @@ export class ChangeSettingsService {
 		return this.httpClient.post<any>(this.UPDATE_PASS_URL, request);
 	}
 
+	getUserByRol(userID: number) {
+		const request = {
+			id: userID,
+		};
+		return this.httpClient.post<AutorByRol>(this.GET_USER_BY_ID_URL, request);
+	}
+
 	deleteUser(): Observable<any> {
 		const request = {
 			access_token: this.auth.getToken(),
@@ -45,7 +57,7 @@ export class ChangeSettingsService {
 		return response;
 	}
 
-	getUser(): Observable<EmailUsername> {
+	getUser(): Observable<any> {
 		const solicitud = this.httpClient.post<any>(this.GET_USER_URL, {
 			access_token: this.auth.getToken(),
 		});

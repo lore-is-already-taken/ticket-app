@@ -1,7 +1,11 @@
 export interface UserInterface {
 	email: string;
-	token: string;
+	access_token: string;
 	username: string;
+	rol: string;
+}
+export interface UserInterfaceWithId extends UserInterface {
+	id: number;
 }
 export interface RegistrationInterface {
 	name: string;
@@ -16,4 +20,9 @@ export interface changeName {
 export interface EmailUsername {
 	name: string;
 	email: string;
+}
+export interface AutorByRol {
+	name: string;
+	email: string;
+	rol: number;
 }
