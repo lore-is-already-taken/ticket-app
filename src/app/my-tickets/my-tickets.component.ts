@@ -17,12 +17,10 @@ export class MyTicketsComponent {
 	ticketLength = 0;
 
 	ngOnInit(): void {
-		this.ticketServices.getTicketsByAuthor().subscribe({
-			next: (data) => {
-				console.log("owned: ", data);
-				this.tickets_owned = data;
-			},
-		});
+		this.getTicketsByAuthor();
+		this.getTicketsByResponsable();
+	}
+	getTicketsByResponsable() {
 		this.ticketServices.getTicketsByResponsable().subscribe({
 			next: (data) => {
 				console.log("pending: ", data);
@@ -30,7 +28,21 @@ export class MyTicketsComponent {
 			},
 		});
 	}
-	closeTicket() {
-		console.log("cerrando ticket");
+	getTicketsByAuthor() {
+		this.ticketServices.getTicketsByAuthor().subscribe({
+			next: (data) => {
+				console.log("owned: ", data);
+				this.tickets_owned = data;
+			},
+		});
+	}
+
+	closeTicket(ticketID: number) {
+		this.ticketServices.closeSelectedTicket(ticketID).subscribe({
+			next: () => {
+				alert("Ticket cerrado exitosamente");
+				this.getTicketsByAuthor();
+			},
+		});
 	}
 }

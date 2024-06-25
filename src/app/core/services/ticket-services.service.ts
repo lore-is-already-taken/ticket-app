@@ -1,9 +1,10 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable, input } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { AuthService } from "./auth.service";
 import { API_URL } from "./common";
 import { TicketInterface } from "../../interfaces/ticket.interface";
+import { hasLift } from "rxjs/internal/util/lift";
 
 @Injectable({
 	providedIn: "root",
@@ -16,6 +17,8 @@ export class TicketServicesService {
 
 	GET_TICKETS_BY_AUTOR_URL = API_URL + "get_tickets_by_autor";
 	GET_TICKETS_BY_USER_URL = API_URL + "get_tickets_by_responsable";
+	CLOSE_TICKET_URL = API_URL + "close_ticket";
+
 	constructor(
 		private httpClient: HttpClient,
 		private authService: AuthService,
@@ -48,6 +51,13 @@ export class TicketServicesService {
 			access_token: this.authService.getToken(),
 		};
 		return this.httpClient.post(this.GET_TICKETS_BY_USER_URL, request);
+	}
+
+	closeSelectedTicket(ticketID: number): Observable<any> {
+		const request = {
+			id: ticketID,
+		};
+		return this.httpClient.post(this.CLOSE_TICKET_URL, request);
 	}
 
 	assignTicket(ticketID: number): Observable<any> {

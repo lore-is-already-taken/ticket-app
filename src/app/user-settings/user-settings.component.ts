@@ -37,7 +37,6 @@ export class UserSettingsComponent {
 				});
 			this.userSettings.getUser().subscribe({
 				next: (x) => {
-					console.log("este es el k edite", x);
 					this.user.nombre = x.name;
 					this.user.email = x.email;
 				},
@@ -47,16 +46,16 @@ export class UserSettingsComponent {
 			alert("No puede un nombre vacio");
 		}
 	}
+
 	getUser() {
-		console.log(
-			this.userSettings.getUser().subscribe({
-				next: (user_info) => {
-					this.user.nombre = user_info.nombre;
-					this.user.email = user_info.email;
-				},
-			}),
-		);
+		this.userSettings.getUser().subscribe({
+			next: (user_info) => {
+				this.user.nombre = user_info.nombre;
+				this.user.email = user_info.email;
+			},
+		});
 	}
+
 	deleteUser() {
 		this.userSettings.deleteUser().subscribe({
 			next: () => alert("your account has been deleted"),

@@ -7,4 +7,5 @@ export interface TicketInterface {
 	review: any;
 	textoReview: any;
 	ticketID: number;
+	status: string;
 }
