@@ -1,16 +1,50 @@
-<div class="relative" (click)="toggleDropdown()">
-  <span class="bell-icon">🔔</span>
-  <span *ngIf="notifications.length > 0" class="badge">{{
-    notifications.length
-  }}</span>
-
-  <div *ngIf="dropdownVisible" class="dropdown">
-    <div *ngFor="let notification of notifications">
-      <div class="dropdown-item" [class.read]="notification.read">
-        {{ notification.content }}
-        <button (click)="markAsRead(notification.id)">Mark as read</button>
-      </div>
-    </div>
+<button
+  id="multiLevelDropdownButton"
+  data-dropdown-toggle="multi-dropdown"
+  class="hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+  type="button"
+  (click)="markAsRead()"
+>
+  <div class="relative" (click)="toggleDropdown()">
+    <span class="bell-icon">🔔</span>
+    <span *ngIf="notifications.length > 0" class="badge">{{
+      notifications.length
+    }}</span>
   </div>
-</div>
+  <svg
+    class="w-2.5 h-2.5 ms-3"
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 10 6"
+  >
+    <path
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="m1 1 4 4 4-4"
+    />
+  </svg>
+</button>
 
+<!-- Dropdown menu -->
+<div
+  id="multi-dropdown"
+  class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+>
+  <ul
+    class="py-2 text-sm text-gray-700 dark:text-gray-200"
+    aria-labelledby="multiLevelDropdownButton"
+  >
+    @for (notification of notifications; track notification.eventoID) {
+      <li class="mr-5">
+        <div class="flex flex-col pb-3">
+          <dt class="mb-1 text-gray-500 md:text-sm dark:text-gray-400">
+            {{ notification.contenido }}
+          </dt>
+        </div>
+      </li>
+    }
+  </ul>
+</div>

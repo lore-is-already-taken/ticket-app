@@ -10,35 +10,33 @@ import { CommonModule } from "@angular/common";
 	styleUrls: ["./notification.component.css"],
 })
 export class NotificationComponent implements OnInit {
-	notifications: { id: number; content: string; read: boolean }[] = [];
+	notifications: any[] = [];
 	dropdownVisible = false;
 
 	constructor(private notificationService: NotificationService) {}
 
 	ngOnInit(): void {
-		this.notificationService
-			.getNotifications()
-			.subscribe((notifications: any[]) => {
-				this.notifications = notifications.map((notification) => ({
-					...notification,
-					read: false,
-				}));
-			});
+		this.notificationService.getNotifications().subscribe({
+			next: (notifications) => {
+				this.notifications = notifications;
+				console.log(this.notifications);
+			},
+		});
 	}
 
-	markAsRead(id: number): void {
-		const notification = this.notifications.find((n) => n.id === id);
-		if (notification) {
-			notification.read = true;
-			this.notificationService.markAsRead(id).subscribe();
-		}
+	markAsRead(): void {
+		console.log("limpiando notificaciones");
+		const newArray = this.notifications.map((item) => ({
+			eventoID: item.eventoID,
+		}));
+		this.notificationService.markAsRead(newArray).subscribe({
+			next: () => {
+				console.log("notificaciones limpiadas");
+			},
+		});
 	}
 
 	toggleDropdown(): void {
 		this.dropdownVisible = !this.dropdownVisible;
-	}
-
-	clearNotifications(): void {
-		this.notifications = [];
 	}
 }
