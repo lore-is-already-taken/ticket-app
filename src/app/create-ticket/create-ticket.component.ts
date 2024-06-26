@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { TicketServicesService } from "../core/services/ticket-services.service";
 import { CommonModule } from "@angular/common";
 import { ReactiveFormsModule } from "@angular/forms";
+import { ChangeSettingsService } from "../core/services/change-settings.service";
 
 @Component({
 	selector: "app-create-ticket",
@@ -13,19 +14,24 @@ import { ReactiveFormsModule } from "@angular/forms";
 })
 export class CreateTicketComponent implements OnInit {
 	ticketForm: FormGroup;
+	users: any = [];
 
 	constructor(
 		private fb: FormBuilder,
 		private ticketService: TicketServicesService,
+		private settingsService: ChangeSettingsService,
 	) {
 		this.ticketForm = this.fb.group({
 			contenido: ["", Validators.required],
 			categoria: ["Soporte", Validators.required],
 			prioridad: [1, Validators.required],
+			responsable: [""],
 		});
 	}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		this.getNormalUsers();
+	}
 
 	createTicket() {
 		if (this.ticketForm.valid) {
@@ -36,5 +42,13 @@ export class CreateTicketComponent implements OnInit {
 		} else {
 			alert("Todos los campos son obligatorios");
 		}
+	}
+	getNormalUsers() {
+		this.settingsService.getNormalUsers().subscribe({
+			next: (x) => {
+				this.users = x;
+				console.log(this.users);
+			},
+		});
 	}
 }
