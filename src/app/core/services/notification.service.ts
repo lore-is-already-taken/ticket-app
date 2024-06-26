@@ -3,7 +3,6 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { API_URL } from "./common";
 import { AuthService } from "./auth.service";
-import { NotificationInterface } from "../../interfaces/notification.interface";
 
 @Injectable({
 	providedIn: "root",
